@@ -3,12 +3,14 @@ import { Provider } from 'react-redux';
 
 import './Config/ReactotronConfig';
 import store from './Store';
-import Main from './Pages/Main';
+import Routes from './Routes';
 
-const App = () => (
-  <Provider store={store}>
-    <Main />
-  </Provider>
-);
+function App() {
+  return (
+    <Provider store={store}>
+      <Routes />
+    </Provider>
+  );
+}
 
 export default App;

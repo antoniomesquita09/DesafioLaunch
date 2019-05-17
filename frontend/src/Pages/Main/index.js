@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import {
+  Text, View, TouchableHighlight, TextInput, TouchableOpacity,
+} from 'react-native';
+import { reduxForm } from 'redux-form';
 
-import { Text, View, TouchableHighlight } from "react-native";
+import styles from './styles';
+import { facebookLogin } from '../../Services/auth';
 
-import styles from "./styles";
-import { facebookLogin } from "../../Services/auth";
-
-export default class Main extends Component {
+class Main extends Component {
   state = {
     error: null,
-    loading: false
+    loading: false,
   };
 
   handleLoginFacebook = async () => {
@@ -18,13 +20,28 @@ export default class Main extends Component {
       this.setState({ error: response.error });
     }
   };
+
+  handleSubmit = (data) => {
+    console.tron.log(data);
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.handleLoginFacebook}>
+        <View>
+          <TextInput type="text" placeholder="Seu nome" />
+          <TouchableOpacity onPress={this.handleSubmit}>
+            <Text>Login</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableHighlight onPress={() => {}}>
           <Text>Entrar com facebook</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
+
+export default reduxForm({
+  form: 'login',
+})(Main);
